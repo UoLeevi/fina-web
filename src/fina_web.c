@@ -5,6 +5,15 @@
 
 #include <stdio.h>
 
+void http_server_before_send_response(
+    uo_cb *cb)
+{
+    uo_http_conn *http_conn = uo_cb_stack_index(cb, 2);
+
+    uo_http_response_set_header(http_conn->http_response, "server", "libuo http");
+    uo_cb_invoke(cb);
+}
+
 int main(
     int argc, 
     char **argv)
@@ -15,9 +24,14 @@ int main(
 
     const char *port = uo_conf_get(conf, "http_server.port");
     const char *root_dir = uo_conf_get(conf, "http_server.root_dir");
+
     uo_http_server *http_server = uo_http_server_create(port);
-    if (!uo_http_server_set_root_dir(http_server, root_dir))
+
+    uo_cb_append(http_server->evt_handlers.before_send_response, http_server_before_send_response);
+
+    if (!uo_http_server_set_opt_serve_static_files(http_server, root_dir))
         uo_err_exit("Error while setting root directory.");
+
     uo_http_server_start(http_server);
 
     printf("Press 'q' to quit...\n");

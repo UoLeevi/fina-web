@@ -23,7 +23,7 @@ target_compile_features(fina-web
     PUBLIC
         c_std_11)
 
-install(DIRECTORY conf/ projectfina
+install(DIRECTORY conf/ ../projectfina/dist
     DESTINATION bin)
 
 install(TARGETS fina-web
