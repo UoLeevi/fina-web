@@ -13,24 +13,24 @@ if(NOT TARGET uo::uo_prog)
     find_package(uo_prog CONFIG REQUIRED)
 endif()
 
-add_executable(fina-web
-    fina_web.c)
+add_executable(projectfina-web
+    projectfina-web.c)
 
-target_link_libraries(fina-web
+target_link_libraries(projectfina-web
     PRIVATE
         uo::uo_conf
         uo::uo_err
         uo::uo_http
         uo::uo_prog)
 
-target_compile_features(fina-web
+target_compile_features(projectfina-web
     PUBLIC
         c_std_11)
 
-install(DIRECTORY conf/ ../projectfina/dist
+install(DIRECTORY conf/
     DESTINATION bin)
 
-install(TARGETS fina-web
+install(TARGETS projectfina-web
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin

@@ -21,7 +21,7 @@ int main(
 {
     uo_http_init();
 
-    uo_conf *conf = uo_conf_create("fina-web.conf");
+    uo_conf *conf = uo_conf_create("projectfina-web.conf");
 
     const char *port = uo_conf_get(conf, "http_server.port");
     const char *root_dir = uo_conf_get(conf, "http_server.root_dir");
