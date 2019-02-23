@@ -1,0 +1,14 @@
+[Unit]
+Description=libuo web server for projectfina.com
+
+[Service]
+WorkingDirectory=/usr/local/projectfina-web/bin
+ExecStart=/usr/local/projectfina-web/bin/projectfina-web
+Restart=always
+RestartSec=20
+StartLimitInterval=600
+StartLimitBurst=3
+User=www-data
+
+[Install]
+WantedBy=multi-user.target
